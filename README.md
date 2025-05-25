@@ -1,8 +1,3 @@
-# Chilli Now Dual Recipe Calculator
+# Chilli Now Final
 
-This tool lets you calculate ingredient quantities for:
-
-- Sambal Belacan
-- Crispy Garlic Shrimp Chili
-
-You can calculate based on the number of bottles you want to make or based on how much of a key ingredient (like chili) you have.
+A working recipe calculator using plain HTML inputs and buttons. Deployable on Vercel with no external component dependencies.

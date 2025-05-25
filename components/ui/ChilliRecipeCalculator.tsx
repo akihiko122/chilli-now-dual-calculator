@@ -1,11 +1,5 @@
 "use client";
-
 import { useState } from 'react';
-import { Input } from "../input";
-import { Button } from "../button";
-
-
-
 
 const recipes = {
   sambal: {
@@ -57,65 +51,61 @@ export default function ChilliRecipeCalculator() {
   };
 
   return (
-    <div className="p-4 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Chilli Now Recipe Calculator</h1>
+    <div style={{ padding: '2rem', maxWidth: '600px', margin: 'auto' }}>
+      <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Chilli Now Recipe Calculator</h1>
 
-      <div className="mb-4 space-x-2">
-        <Button variant={selected === 'sambal' ? 'default' : 'outline'} onClick={() => {
-          setSelected('sambal');
-          setIngredientName(Object.keys(recipes['sambal'].base)[0]);
-          setResults({});
-        }}>Sambal Belacan</Button>
-        <Button variant={selected === 'garlic' ? 'default' : 'outline'} onClick={() => {
-          setSelected('garlic');
-          setIngredientName(Object.keys(recipes['garlic'].base)[0]);
-          setResults({});
-        }}>Garlic Shrimp Chili</Button>
+      <div style={{ marginBottom: '1rem' }}>
+        <button onClick={() => { setSelected('sambal'); setIngredientName(Object.keys(recipes['sambal'].base)[0]); setResults({}); }}>
+          Sambal Belacan
+        </button>
+        <button onClick={() => { setSelected('garlic'); setIngredientName(Object.keys(recipes['garlic'].base)[0]); setResults({}); }} style={{ marginLeft: '1rem' }}>
+          Garlic Shrimp Chili
+        </button>
       </div>
 
-      <div className="mb-4">
-        <Button onClick={() => setMode('bottles')} className="mr-2">By Bottles</Button>
-        <Button onClick={() => setMode('ingredient')}>By Ingredient</Button>
+      <div style={{ marginBottom: '1rem' }}>
+        <button onClick={() => setMode('bottles')}>By Bottles</button>
+        <button onClick={() => setMode('ingredient')} style={{ marginLeft: '1rem' }}>By Ingredient</button>
       </div>
 
       {mode === 'bottles' ? (
-        <div className="space-y-2">
-          <label className="block">Number of Bottles:</label>
-          <Input
+        <div style={{ marginBottom: '1rem' }}>
+          <label>Number of Bottles:</label><br />
+          <input
             type="number"
             value={bottles}
             onChange={e => setBottles(Number(e.target.value))}
-            min={0}
+            style={{ padding: '0.5rem', width: '100%' }}
           />
-          <Button onClick={handleBottleCalc}>Calculate</Button>
+          <button onClick={handleBottleCalc} style={{ marginTop: '1rem' }}>Calculate</button>
         </div>
       ) : (
-        <div className="space-y-2">
-          <label className="block">Select Ingredient:</label>
+        <div style={{ marginBottom: '1rem' }}>
+          <label>Select Ingredient:</label><br />
           <select
             value={ingredientName}
             onChange={e => setIngredientName(e.target.value)}
-            className="w-full border p-2 rounded"
+            style={{ padding: '0.5rem', width: '100%' }}
           >
             {Object.keys(recipes[selected].base).map(key => (
               <option key={key} value={key}>{key}</option>
             ))}
           </select>
-          <label className="block">Total Quantity You Have (in unit shown):</label>
-          <Input
+          <label>Total Quantity You Have (in unit shown):</label><br />
+          <input
             type="number"
             value={ingredientQty}
             onChange={e => setIngredientQty(e.target.value)}
-            min={0}
+            style={{ padding: '0.5rem', width: '100%' }}
           />
-          <Button onClick={handleIngredientCalc}>Calculate</Button>
+          <button onClick={handleIngredientCalc} style={{ marginTop: '1rem' }}>Calculate</button>
         </div>
       )}
 
       {Object.keys(results).length > 0 && (
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-2">Calculated Recipe for {recipes[selected].name}:</h2>
-          <ul className="space-y-1">
+        <div style={{ marginTop: '2rem' }}>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Calculated Recipe for {recipes[selected].name}:</h2>
+          <ul>
             {Object.entries(results).map(([key, value]) => (
               <li key={key}>{key}: <strong>{value}</strong></li>
             ))}
